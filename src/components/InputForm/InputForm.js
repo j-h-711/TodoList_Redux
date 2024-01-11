@@ -7,28 +7,27 @@ import { add_todo, edit_todo, complete_todo } from "../../commons/actions";
 const InputForm = () => {
   const dispatch = useDispatch();
 
-  const [text, setText] = useState("");
+  const [title, setTtitle] = useState("");
 
   const handleChange = (e) => {
     const { value } = e.target;
 
-    setText(value);
+    setTtitle(value);
   };
 
   // todo 작성 완료 클릭시
   const handleClick = () => {
-    if (text === "") {
+    if (title === "") {
       alert("내용을 작성 후 추가해주세요.");
     } else {
       const time = new Date();
       const todo = {
-        title: text,
+        title: title,
         time: time,
-        isComplete: false,
       };
 
       dispatch(add_todo(todo));
-      setText("");
+      setTtitle("");
     }
   };
 
@@ -44,7 +43,7 @@ const InputForm = () => {
         type="text"
         placeholder="할 일을 입력하세요!!"
         onChange={handleChange}
-        value={text}
+        value={title}
         onKeyDown={handleKeyPress}
       />
       <S.Button onClick={handleClick}>추가</S.Button>

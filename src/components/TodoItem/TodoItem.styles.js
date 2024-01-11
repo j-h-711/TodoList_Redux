@@ -29,6 +29,8 @@ export const Text = styled.span`
 
   text-decoration: ${({ isComplete }) =>
     isComplete ? "line-through" : "none"};
+
+  color: ${({ isComplete }) => (isComplete ? "lightgrey" : "black")};
 `;
 
 export const Time = styled.span`

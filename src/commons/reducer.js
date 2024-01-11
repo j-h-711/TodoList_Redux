@@ -1,7 +1,20 @@
 import { ADD, COMPLETE, DELETE, EDIT } from "./actions";
 
 const initialState = {
-  todos: [],
+  todos: [
+    {
+      id: 1,
+      title: "식사 장소 예약하기",
+      isComplete: false,
+      time: "2024. 1. 11. 오후 2:14:44",
+    },
+    {
+      id: 2,
+      title: "1월 10일 저녁 7시에 헬스장 가기",
+      isComplete: true,
+      time: "2024. 1. 11. 오후 6:10:30",
+    },
+  ],
 };
 
 // action.type/action.payload 를 가지고

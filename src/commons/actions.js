@@ -1,11 +1,12 @@
 import { createAction } from "@reduxjs/toolkit";
+import { createContext } from "react";
 
 export const ADD = "ADD_TODO";
 export const DELETE = "DELETE_TODO";
 export const EDIT = "EDIT_TODO";
 export const COMPLETE = "COMPLETE_TODO";
 
-let id = 1;
+let id = 3;
 
 // todo 추가와 삭제 action
 // 생성,삭제 로직은 reducer에게 위임
@@ -17,7 +18,7 @@ export const add_todo = (todo) => {
     todo: {
       id: id++,
       title: todo.title,
-      isComplete: todo.isComplete,
+      isComplete: false,
       time: todo.time,
     },
   };
