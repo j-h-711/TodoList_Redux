@@ -47,7 +47,7 @@ const InputForm = () => {
         value={text}
         onKeyDown={handleKeyPress}
       />
-      <S.Button onClick={handleClick}>추가 하기</S.Button>
+      <S.Button onClick={handleClick}>추가</S.Button>
     </S.Container>
   );
 };
