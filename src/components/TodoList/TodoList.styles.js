@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   max-height: 420px;
-  overflow-y: auto; // 여기 수정
+  overflow-y: auto;
   border-radius: 15px;
 `;
 

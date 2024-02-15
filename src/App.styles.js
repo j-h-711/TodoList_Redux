@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
 
   display: flex;
   flex-direction: column;
@@ -27,6 +27,12 @@ export const Wrapper = styled.div`
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+
+  // @media (max-width: 768px) {
+  //   height: auto; /* Adjust the height as needed for smaller screens */
+  //   width: 100%; /* Set width to 100% for smaller screens */
+  //   overflow: auto; /* Add overflow property to enable scrolling if content overflows */
+  // }
 `;
 
 export const Title = styled.div`

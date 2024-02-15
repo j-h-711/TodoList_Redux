@@ -1,26 +1,18 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import * as S from "./TodoItem.styles";
-import { complete_todo, delete_todo, edit_todo } from "../../commons/actions";
+import { deleteTodo, completeTodo, editTodo } from "../../commons/reducer";
 
 const TodoItem = ({ todo }) => {
   const dispatch = useDispatch();
   const { id, title, time, isComplete } = todo;
-
   // 수정 중 여부와 수정된 제목 상태 추가
   const [isEditing, setIsEditing] = useState(false);
   const [newTitle, setNewTitle] = useState(title);
 
   // 완료 체크 버튼 클릭시 실행 함수
   const handleComplete = () => {
-    const todo = {
-      id: id,
-      title: newTitle,
-      time: time,
-      isComplete: isComplete,
-    };
-
-    dispatch(complete_todo(todo));
+    dispatch(completeTodo(id));
   };
 
   // 수정 버튼 클릭시 실행 함수
@@ -35,23 +27,19 @@ const TodoItem = ({ todo }) => {
 
   // 수정-저장 버튼 클릭시 실행 함수
   const handleSaveClick = () => {
-    const todo = {
-      id: id,
-      title: newTitle,
-      time: time,
-      isComplete: isComplete,
-    };
-    dispatch(edit_todo(todo));
+    const payload = { id, newTitle };
+    dispatch(editTodo(payload));
     setIsEditing(false);
   };
 
   // 삭제 버튼 클릭시 실행 함수
   const handleDeleteClick = () => {
-    dispatch(delete_todo(id));
+    dispatch(deleteTodo(id));
   };
 
+  const timeDate = new Date(time);
   // 시간 변환
-  const KRtime = time.toLocaleString("ko-KR", {
+  const KRtime = timeDate.toLocaleString("ko-KR", {
     year: "numeric",
     month: "numeric",
     day: "numeric",

@@ -1,49 +1,53 @@
-import { ADD, COMPLETE, DELETE, EDIT } from "./actions";
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   todos: [
     {
-      id: 1,
-      title: "식사 장소 예약하기",
+      id: 1705303245946,
+      title: "다음주 월요일 저녁 식사 장소 예약하기",
       isComplete: false,
-      time: "2024. 1. 11. 오후 2:14:44",
+      time: 1705303245946,
     },
     {
-      id: 2,
-      title: "1월 10일 저녁 7시에 헬스장 가기",
+      id: 1705303252755,
+      title: "2월 1일 저녁 7시에 헬스장 가기",
       isComplete: true,
-      time: "2024. 1. 11. 오후 6:10:30",
+      time: 1705303252759,
     },
   ],
 };
 
-// action.type/action.payload 를 가지고
-// action의 type에 따라 어떤 결과를 내어야 할지 정의
-export const reducer = (state = initialState, action) => {
-  switch (action.type) {
-    case ADD:
-      return {
-        todos: [...state.todos, action.todo],
-      };
-    case DELETE:
-      return {
-        todos: [...state.todos.filter((todo) => todo.id !== action.id)],
-      };
-    case EDIT:
+export const todoSlice = createSlice({
+  name: "todos",
+  initialState,
+  reducers: {
+    addTodo: (state = initialState, action) => {
+      state.todos = [...state.todos, action.payload];
+    },
+    deleteTodo: (state = initialState, action) => {
+      state.todos = [
+        ...state.todos.filter((todo) => todo.id !== action.payload),
+      ];
+    },
+    editTodo: (state = initialState, action) => {
       const updatedTodos = state.todos.map((todo) =>
-        todo.id === action.id ? { ...todo, title: action.title } : todo
+        todo.id === action.payload.id
+          ? { ...todo, title: action.payload.newTitle }
+          : todo
       );
-      return {
-        todos: updatedTodos,
-      };
-    case COMPLETE:
+      state.todos = updatedTodos;
+    },
+    completeTodo: (state = initialState, action) => {
       const updatedTodosComplete = state.todos.map((todo) =>
-        todo.id === action.id ? { ...todo, isComplete: !todo.isComplete } : todo
+        todo.id === action.payload
+          ? { ...todo, isComplete: !todo.isComplete }
+          : todo
       );
-      return {
-        todos: updatedTodosComplete,
-      };
-    default:
-      return state;
-  }
-};
+      state.todos = updatedTodosComplete;
+    },
+  },
+});
+
+export const { addTodo, deleteTodo, completeTodo, editTodo } =
+  todoSlice.actions;
+export default todoSlice.reducer;

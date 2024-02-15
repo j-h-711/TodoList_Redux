@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 
 import * as S from "./InputForm.styles";
-import { add_todo, edit_todo, complete_todo } from "../../commons/actions";
+import { addTodo } from "../../commons/reducer";
 
 const InputForm = () => {
   const dispatch = useDispatch();
@@ -21,12 +21,15 @@ const InputForm = () => {
       alert("내용을 작성 후 추가해주세요.");
     } else {
       const time = new Date();
+      const timestamp = time.getTime();
       const todo = {
+        id: timestamp,
         title: title,
-        time: time,
+        time: timestamp,
+        isComplete: false,
       };
 
-      dispatch(add_todo(todo));
+      dispatch(addTodo(todo));
       setTtitle("");
     }
   };
